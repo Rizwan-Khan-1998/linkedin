@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .menu-link {
+        @apply  flex flex-col justify-center items-center min-w-20 h-full opacity-70 hover:opacity-100
+    }
+
+    a.active {
+        @apply  opacity-100 border-b-2 border-black !important;
+    }
+    .container{
+        @apply max-w-[1128px] w-screen;
+    }
+    .page-layout {
+        @apply flex m-auto;
+    }
+
+    .bottom-row-button {
+        @apply flex justify-center items-center gap-2 p-2;
+    }
+
+}
