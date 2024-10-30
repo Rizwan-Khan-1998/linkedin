@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 # LinkedIn-Clone
 This project is a front-end clone of LinkedIn, built using React, React Router DOM, Redux, and Tailwind CSS. It mimics LinkedIn’s core UI features and user interactions on the client side.
@@ -22,3 +23,5 @@ Redux: Centralized state management for smooth UI updates.
 React Router DOM: For page navigation and routing.
 Tailwind CSS: Utility-first CSS framework for responsive and customizable styling.
 >>>>>>> 6aee23f (Update README.md)
+=======
+>>>>>>> 800bf7d (first commit)

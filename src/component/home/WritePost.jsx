@@ -6,12 +6,15 @@ import { UserContext } from "./context";
 function Media() {
   return <>media</>;
 }
+
 function Post() {
   return <>Post</>;
 }
+
 function Event() {
   return <>event</>;
 }
+
 function Article() {
   return <>article</>;
 }
@@ -40,7 +43,7 @@ function WritePostModal({ show, handleClose, content }) {
   };
 
   if (!show) return null;
-  return (
+  return createPortal(
     <div
       ref={modalRef}
       onClick={closeModal}
@@ -48,8 +51,11 @@ function WritePostModal({ show, handleClose, content }) {
     >
       <div className="absolute share-box h-[60vh] top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center max-w-[744px] w-screen bg-white rounded-lg">
         {renderContent()}
+        <h1>I am a Modal</h1>
+        <button onClick={handleClose}>Close</button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
@@ -61,7 +67,7 @@ function TopRowOfWritePost({ handleOpen }) {
       <button
         className="grow border-2 border-gray-200 flex items-center justify-start px-4 rounded-[35px] hover:bg-[#f3f2ee] h-12"
         type="button"
-        onClick={() => handleOpen("post")}
+        onClick={handleOpen}
       >
         Start a Post, try writing with AI
       </button>
@@ -100,9 +106,12 @@ function WritePostContainer() {
     <div className="bg-white rounded-xl border-2 border-gray-200 py-2">
       <TopRowOfWritePost handleOpen={handleOpen} />
       <BottomRowOfWritePost handleOpen={handleOpen} />
-      {createPortal(
-        <WritePostModal show={show} handleClose={handleClose} content={content} />,
-        document.body
+      {show && (
+        <WritePostModal
+          show={show}
+          handleClose={handleClose}
+          content={content}
+        />
       )}
     </div>
   );
