@@ -12,9 +12,9 @@ function MenuLink({ to, image, imageActive, title }) {
           <img
             src={ isActive ? imageActive : image}
             alt={title}
-            className="nav-link m-auto"
+            className="nav-link m-auto w-6 h-6"
           />
-          <h1>{title}</h1>
+          <h1 className="text-xs">{title}</h1>
         </>)
       }}
     </NavLink>

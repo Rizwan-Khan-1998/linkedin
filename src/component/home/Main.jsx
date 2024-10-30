@@ -1,6 +1,7 @@
 
 import { UserInfoProvider } from "../../contextApi/provider";
 import WritePostContainer from "./WritePost";
+import Posts from './Posts';
 
 
 function Main() {
@@ -11,6 +12,7 @@ function Main() {
       <UserInfoProvider>
         <WritePostContainer  />
       </UserInfoProvider>
+      <Posts/>
     </div>
   );
 }

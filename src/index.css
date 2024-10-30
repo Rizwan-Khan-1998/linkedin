@@ -18,7 +18,15 @@
     }
 
     .bottom-row-button {
-        @apply flex justify-center items-center gap-2 p-2;
+        @apply flex justify-center items-center gap-2 p-2 ;
+    }
+
+
+    .post-action-button {
+        @apply flex items-center justify-center gap-2 hover:bg-gray-100 rounded-lg grow px-1 py-2;
+    }
+    .post-action-button-img {
+        @apply w-6 h-6;
     }
 
 }

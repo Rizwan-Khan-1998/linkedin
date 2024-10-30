@@ -1,6 +1,6 @@
 export default function SearchBar() {
     return (
-      <div className="flex rounded items-center w-70 bg-slate-200 mr-12 px-4">
+      <div className="flex rounded items-center bg-[#e1eef0] mr-12 px-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -16,7 +16,7 @@ export default function SearchBar() {
         <input
           type="text"
           placeholder="Search"
-          className="bg-slate-200 text-gray-800 placeholder-gray-700 h-9 focus:outline-none"
+          className="bg-[#e1eef0] text-gray-800 placeholder:text-gray-700 h-9 focus:outline-none"
         />
       </div>
     );
