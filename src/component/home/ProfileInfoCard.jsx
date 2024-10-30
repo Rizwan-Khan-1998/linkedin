@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../../contextApi/context";
+import { UserContext } from "./context";
 
 export default function ProfileInfoCard() {
   const userInfo = useContext(UserContext);

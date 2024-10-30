@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState, useRef } from "react";
 import { createPortal } from "react-dom";
-import { UserContext } from "../../contextApi/context";
+import { UserContext } from "./context";
 
 function Media() {
   return <>media</>;

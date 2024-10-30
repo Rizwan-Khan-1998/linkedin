@@ -1,5 +1,5 @@
 
-import { UserInfoProvider } from "../../contextApi/provider";
+import { UserInfoProvider } from "./Provider";
 import WritePostContainer from "./WritePost";
 import Posts from './Posts';
 
