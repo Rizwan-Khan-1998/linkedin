@@ -28,5 +28,8 @@
     .post-action-button-img {
         @apply w-6 h-6;
     }
+    .write-action--img {
+        @apply w-6 h-6 ;
+    }
 
 }

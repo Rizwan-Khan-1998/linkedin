@@ -17,7 +17,7 @@ function TopHeadMessges() {
   return (
     <div className={` transition-all duration-500 ease-in-out flex flex-col fixed bottom-0 right-[5%] rounded-t-lg border  border-gray-300 p-2 bg-white `}>
       <div
-        className=" flex items-center gap-20 "
+        className=" flex items-center gap-20"
         onClick={handleToggle}
       >
         <div className="flex items-center gap-2">

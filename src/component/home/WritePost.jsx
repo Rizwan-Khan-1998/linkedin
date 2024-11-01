@@ -1,15 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useContext, useState, useRef } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { UserContext } from "./context";
+import { UserContext } from "./context.js";
+import PostModal from "./PostModal.jsx";
 
 function Media() {
   return <>media</>;
 }
 
-function Post() {
-  return <>Post</>;
-}
+
 
 function Event() {
   return <>event</>;
@@ -19,18 +18,29 @@ function Article() {
   return <>article</>;
 }
 
-function WritePostModal({ show, handleClose, content }) {
+function WritePost({ show, handleClose, content }) {
   const modalRef = useRef(null);
   const closeModal = (e) => {
     if (modalRef.current === e.target) {
       handleClose();
     }
   };
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [show]);
 
   const renderContent = () => {
     switch (content) {
       case "post":
-        return <Post />;
+        return <PostModal />;
       case "media":
         return <Media />;
       case "article":
@@ -49,10 +59,8 @@ function WritePostModal({ show, handleClose, content }) {
       onClick={closeModal}
       className="modal-overlays absolute top-0 left-0 w-screen h-screen z-10 bg-black bg-opacity-50"
     >
-      <div className="absolute share-box h-[60vh] top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center max-w-[744px] w-screen bg-white rounded-lg">
+      <div className=" max-w-[744px] w-screen bg-white rounded-lg mx-auto mt-12">
         {renderContent()}
-        <h1>I am a Modal</h1>
-        <button onClick={handleClose}>Close</button>
       </div>
     </div>,
     document.body
@@ -67,7 +75,7 @@ function TopRowOfWritePost({ handleOpen }) {
       <button
         className="grow border-2 border-gray-200 flex items-center justify-start px-4 rounded-[35px] hover:bg-[#f3f2ee] h-12"
         type="button"
-        onClick={handleOpen}
+        onClick={() => handleOpen("post")}
       >
         Start a Post, try writing with AI
       </button>
@@ -84,7 +92,10 @@ function BottomRowOfWritePost({ handleOpen }) {
       <button onClick={() => handleOpen("event")} className="bottom-row-button">
         Event
       </button>
-      <button onClick={() => handleOpen("article")} className="bottom-row-button">
+      <button
+        onClick={() => handleOpen("article")}
+        className="bottom-row-button"
+      >
         Write article
       </button>
     </div>
@@ -107,7 +118,7 @@ function WritePostContainer() {
       <TopRowOfWritePost handleOpen={handleOpen} />
       <BottomRowOfWritePost handleOpen={handleOpen} />
       {show && (
-        <WritePostModal
+        <WritePost
           show={show}
           handleClose={handleClose}
           content={content}

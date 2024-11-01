@@ -1,7 +1,7 @@
 
 import { UserInfoProvider } from "./Provider";
 import WritePostContainer from "./WritePost";
-import Posts from './Posts';
+import Posts from '../posts/Posts';
 
 
 function Main() {

@@ -1,152 +1,22 @@
 /* eslint-disable react/prop-types */
 
 import { useRef, useState, useEffect } from "react";
-
-/* eslint-disable no-unused-vars */
-const user = {
-  name: "Rizwan Khan",
-  profilePic: "images/profile-pic.png",
-  coverPic: "images/cover-photo-user.png",
-  bio: "Passionate Self-Taught Software Developer",
-  city: "Indore, Madhya Pradesh, India",
-  Company: {
-    Cname: "Wipro",
-    Cweb: "https://www.wipro.com/",
-    cImg: "images/company-logo.png",
-  },
-};
-// eslint-disable-next-line no-unused-vars
-const posts = [
-  {
-    text: `Success isn't just about talent.
-
-It's about choices.
-
-10 things that require 0 talent but make you unstoppable:
-
-1. Being on time
-↳ Respect others, respect yourself
-↳ Punctuality is the easiest promise to keep
-
-2. Work ethic
-↳ Outwork your excuses
-↳ Hustle beats talent when talent doesn't hustle
-
-3. Effort
-↳ Go the extra mile. It's never crowded
-↳ The only bad workout is the one that didn't happen
-
-4. Energy
-↳ Enthusiasm is contagious
-↳ Be the battery, not the drain
-
-5. Body language
-↳ Stand tall, go far
-↳ Your vibe attracts your tribe
-
-6. Passion
-↳ Set yourself on fire and people will come to watch you burn
-↳ Love what you do, or love why you do it
-
-7. Doing extra
-↳ Average is overcrowded
-↳ The extra mile is your fast lane to success
-
-8. Being prepared
-↳ Luck is when preparation meets opportunity
-↳ If you stay ready, you never have to get ready
-
-9. Being coachable
-↳ The day you stop learning is the day you stop leading
-↳ Be a sponge, not a rock
-
-10. Being kind`,
-    postMedia: "images/profile-pic.png",
-    likes: 25,
-    comments: [
-      {
-        name: "Shahzeb Qureshi",
-        comment: "well said bro",
-      },
-    ],
-    reposts: 15,
-    postedTime: function () {
-      return new Date();
-    },
-  },
-  {
-    text: "my name is rizwan",
-    postMedia: "images/profile-pic.png",
-    likes: 5,
-    comments: [
-      {
-        name: "Shahzeb Qureshi",
-        comment: "well said bro",
-      },
-    ],
-    reposts: 15,
-    media: "images/karsten.jpg",
-    postedTime: function () {
-      return new Date();
-    },
-  },
-  {
-    text: `We Are Hiring - hashtag#Freshers, hashtag#Internship & Experience 
-(College Student) & 
-Entry Level candidate-2024
-
-hashtag#Salary: 25K - 80K in Hand + Incentive Shift
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from "../../lib/firebaseConfig";
 
 
-hashtag#Apply Here :- https://lnkd.in/eUVN5bk7
+import useFetchPost from "../../hooks/useFetchPost";
 
-hashtag#Salary: 25K - 80K in Hand + Incentive Shift
 
-hashtag#Timings :: 09:00am To6:0 00pm
-**Laptop Kit Will be Provided By Company
--5 Days Working (( Sat- Sun Fixed Off)
 
-Role:-
-- Entry Level -8
-- Freshers -8
-- Banking-8
-- Assistant HR-8
-- Java -8
-- SAP fresher -8
-- CA/ CS intern -8
-- Copy paste work -20
-- Data Entry Level -13
-- Admin -9
-- HR-7
-- Manual Testing -7
-- Business Analysis.-8
--Software Trainee
--QA Engineer -8
--Account -8`,
-    postMedia: "images/profile-pic.png",
-    likes: 3,
-    comments: [
-      {
-        name: "Shahzeb Qureshi",
-        comment: "well said bro",
-      },
-    ],
-    reposts: 15,
-    media: "images/samsung.jpg",
-    postedTime: function () {
-      return new Date();
-    },
-  },
-];
-
-const name = "Rizwan Khan";
 
 // eslint-disable-next-line react/prop-types
 function PostProfile({ data }) {
-  console.log("im user data " + data);
+  console.log(data);
+ 
   return (
     <div className="px-4 pt-4 flex gap-4">
-      <img className="rounded-full w-12 h-12" src={data.profilePic} alt="" />
+      <img className="rounded-full w-12 h-12" src={data.profile_pic} alt="" />
       <div className="flex items-center grow">
         <p className="text-black text-large font-semibold justify-self-end leading-none">
           {data.name} <br></br>
@@ -269,8 +139,8 @@ function PostComment() {
   // Adjust textarea height dynamically
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.style.height = "auto"; // Reset height
-      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`; // Adjust height to fit content
+      inputRef.current.style.height = "auto";
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`; 
     }
   }, [comment]); // Runs when the comment changes
 
@@ -334,24 +204,22 @@ function PostComment() {
 
 function Comment({ comments }) {
   return (
-      <>
+    <>
       {comments.map((comment, index) => (
-          <>
+        <>
           <div className="px-4 pt-4 flex gap-2" key={index}>
-          <div
-            className="rounded-full w-7 h-7 bg-red-800"
-          />
-          <div className="flex flex-col grow">
-            <p className="text-black text-sm font-semibold justify-self-end leading-none">
-              {comment.name} <br />
-              <span className="text-xs text-gray-500 justify-self-start font-normal">
-                Full Stack Java Developer
-              </span>
-            </p>
-            <pre className="mt-2">{comment.comment}</pre>
+            <div className="rounded-full w-7 h-7 bg-red-800" />
+            <div className="flex flex-col grow">
+              <p className="text-black text-sm font-semibold justify-self-end leading-none">
+                {comment.name} <br />
+                <span className="text-xs text-gray-500 justify-self-start font-normal">
+                  Full Stack Java Developer
+                </span>
+              </p>
+              <pre className="mt-2">{comment.comment}</pre>
+            </div>
           </div>
-        </div>
-          </>
+        </>
       ))}
     </>
   );
@@ -366,21 +234,13 @@ function PostComments({ showComment, comments }) {
     </div>
   );
 }
-function PostActionButtons({ setLike, handleComments }) {
+function PostActionButtons({ handleLikeUpdate, handleComments }) {
   const [liked, setLiked] = useState(false);
 
-  function handleLike() {
-    if (!liked) {
-      setLike((prev) => prev + 1);
-      setLiked(!liked);
-    } else {
-      setLike((prev) => prev - 1);
-      setLiked(!liked);
-    }
-  }
+
   return (
     <div className="flex justify-between px-4">
-      <button className={`post-action-button`} onClick={handleLike}>
+      <button className={`post-action-button`} onClick={() =>{handleLikeUpdate; setLiked(!liked)}}>
         <img
           className="post-action-button-img"
           src={!liked ? `images/like-action.svg` : `images/liked-btn.svg`}
@@ -416,21 +276,38 @@ function PostActionButtons({ setLike, handleComments }) {
   );
 }
 
-function PostFooter({ likes, comments, reposts, handleComments }) {
+function PostFooter({ likes, comments, reposts, handleComments, id }) {
   const [like, setLike] = useState(likes);
+  const handleLikeUpdate = async () => {
+ 
+    try {
+      // Reference the document by ID in the posts collection
+      const postRef = doc(db, "posts", id);
 
+      // Update only the specified fields
+      await updateDoc(postRef, {
+        likes: likes + 1,
+      });
+
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
+    setLike(likes + 1);
+  };
   return (
     <>
       <LikeAndCommentsDetaies
         likes={like}
-        comments={comments.length}
+        comments={comments}
         reposts={reposts}
       />
-      <PostActionButtons setLike={setLike} handleComments={handleComments} />
+      <PostActionButtons handleLikeUpdate={handleLikeUpdate} handleComments={handleComments} /> 
     </>
   );
 }
 function Post({ post }) {
+  
+  console.log(post);
   const [showComment, setShowComment] = useState(true);
 
   function handleComments() {
@@ -438,26 +315,33 @@ function Post({ post }) {
   }
   return (
     <div className="w-100 bg-white mb-2">
-      <PostProfile data={user} />
-      <Content text={post.text} />
+      <PostProfile data={post.user} />  
+      <Content text={post.post_content} />
+      <Media media={post.post_media_content}/>
 
       <PostFooter
         likes={post.likes}
         comments={post.comments}
         reposts={post.reposts}
+        id = {post.id}
         handleComments={handleComments}
-      />
-      <PostComments showComment={showComment} comments={post.comments} />
+      /> 
+      {/* <PostComments showComment={showComment} comments={post.comments} />  */}
     </div>
   );
 }
 
 export default function Posts() {
+  const { postsData, loading, error } = useFetchPost();
+  console.log(postsData);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading posts: {error.message}</p>;
+  if (!postsData || postsData.length === 0) return <p>No posts available</p>;
   return (
     <>
-      <Post post={posts[0]} />
-      <Post post={posts[1]} />
-      <Post post={posts[2]} />
+     <Post post={postsData[0]}/>
+      <Post post={postsData[1]}/> 
+     
     </>
   );
 }
